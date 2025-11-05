@@ -21,7 +21,7 @@ crossing(g1 = 1:G, g2 = 1:G, id = 1:N) |>
   mutate(x = rnorm(n())) |>
   as_duckdb_tibble(prudence = "stingy") |>
   summarize(.by = c(g1, g2), m = mean(x)) |>
-  mutate(teidt = paste0("Mean: ", m)) |>
+  mutate(text = paste0("Mean: ", m)) |>
   collect()
 
 # Use collect() to have the query handled by dplyr
@@ -30,7 +30,7 @@ crossing(g1 = 1:G, g2 = 1:G, id = 1:N) |>
   as_duckdb_tibble(prudence = "stingy") |>
   summarize(.by = c(g1, g2), m = mean(x)) |>
   collect() |>
-  mutate(teidt = paste0("Mean: ", m))
+  mutate(text = paste0("Mean: ", m))
 
 # Can do multiple pipeline steps
 # Translation not supported
@@ -40,7 +40,7 @@ crossing(g1 = 1:G, g2 = 1:G, id = 1:N) |>
   summarize(.by = c(g1, g2), m = mean(x)) |>
   mutate(.by = g1, sd = sd(m)) |>
   collect() |>
-  mutate(teidt = paste0("Mean: ", m))
+  mutate(text = paste0("Mean: ", m))
 
 # Need to adapt the translation
 crossing(g1 = 1:G, g2 = 1:G, id = 1:N) |>
@@ -49,6 +49,6 @@ crossing(g1 = 1:G, g2 = 1:G, id = 1:N) |>
   summarize(.by = c(g1, g2), m = mean(x)) |>
   mutate(.by = g1, sd = sd(m, na.rm = TRUE)) |>
   collect() |>
-  mutate(teidt = paste0("Mean: ", m))
+  mutate(text = paste0("Mean: ", m))
 
 # Caution: results coming back in random order!
