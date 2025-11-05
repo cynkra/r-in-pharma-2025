@@ -1,4 +1,4 @@
-duckdb::sql_exec(
+duckdb::sql_query(
   "SELECT COUNT(*)
    FROM 'personas.parquet'"
 )
